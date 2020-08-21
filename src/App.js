@@ -3,11 +3,12 @@ import './App.css';
 import Card from './components/card'
 
 
+
 function App() {
 
 
   const [cardInfo, setCardInfo] = useState([]);
-  const [index, setIndex] = useState(1)
+  const [index, setIndex] = useState(0)
 
 
 
@@ -25,13 +26,11 @@ function App() {
   }, [index])
 
   
-  const nextQuestionHandler = () => setIndex(Number(index) + 1 )
+  const nextQuestionHandler = () => setIndex(Number(index) + 1)
   
-  
-  // const PreviousQuestionHandler = () => setIndex(
-  // if (Number(index) >= 0){
-  //   Number(index) - 1}
-  // )
+
+  const PreviousQuestionHandler = () => setIndex(Number(index) - 1)
+
 
 
   return (
@@ -40,13 +39,14 @@ function App() {
             <h1>My Flashcard App</h1>
         </header>
         <Card cardInfo={cardInfo} index={index}/>
-      {/* <div>
+      <div>
         <button onClick={nextQuestionHandler}>Next Question</button>
       </div>
 
       <div>
         <button onClick={PreviousQuestionHandler}>Previous Question</button>
-      </div> */}
+      </div>
+  
       
     </div>
   );
