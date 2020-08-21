@@ -1,8 +1,8 @@
 import React from 'react';
 
-function card(props){
+function Card(props){
 
-  console.log(props)
+ 
     return (
         <div>
             <div>Card Info:</div>
@@ -21,4 +21,4 @@ function card(props){
     )
 }
 
-export default card;
+export default Card;
