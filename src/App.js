@@ -14,6 +14,7 @@ function App() {
   const [question, setQuestion] = useState()
   const [answer, setAnswer] = useState()
 
+  // test if this can be removed in the morning
   const newCard = {question: question , answer:answer}
 
   useEffect(()=>{
