@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 
 function Answer(props){
+
+    const [ display, setDisplay] = useState(false)
+
     return (
         <div>
-            {props.card.answer}
+            <button onClick = {(display)=>setDisplay(true)}>Display Answer</button> 
+            {display ? props.card.answer : null}
         </div>
     )
 }
