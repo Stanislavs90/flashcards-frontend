@@ -1,4 +1,5 @@
 import React from 'react';
+import Answer from './answer';
 
 function Card(props){
 
@@ -11,9 +12,11 @@ function Card(props){
               return ( index === props.index ?  
                 <div key={card.id}>
                <h2>{card.question}</h2>
-               <h2>{card.answer}</h2>
+               <Answer card={card} />
+               {/* <h2>{card.answer}</h2> */}
                </div>
                : "" 
+               
               )
             })}
           </div>
