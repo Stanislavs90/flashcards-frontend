@@ -5,7 +5,7 @@ function Card(props){
 
  
     return (
-        <div>
+        <div >
             <div>Card Info:</div>
             <div key={props.cardInfo.id} >
             {props.cardInfo.map((card, index) => {
@@ -14,7 +14,7 @@ function Card(props){
                <h2>{card.question}</h2>
                <Answer card={card} />
                </div>
-               : "" 
+               : '                 ' 
                
               )
             })}

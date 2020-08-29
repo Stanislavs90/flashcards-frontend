@@ -13,8 +13,6 @@ function App() {
   const [question, setQuestion] = useState()
   const [answer, setAnswer] = useState()
 
-  // test if this can be removed in the morning
-  const newCard = {question: question , answer:answer}
 
   useEffect(()=>{
     fetch(`http://localhost:8000/flashcards/`, {
@@ -50,13 +48,15 @@ function App() {
 
 
   
-
+ // Map over API data coming
   let idInfo = cardInfo.map((card, index)=>{
     return card.id;
   })
 
+  // find last element added
   let maxId = Math.max(...idInfo)
   
+  // delete last element added
   const deleteCard = (cardInfo, index) => 
   fetch(`http://localhost:8000/flashcards/${maxId}/`, {
       method: 'DELETE',
@@ -74,24 +74,24 @@ function App() {
         <header className="App-header">
             <h1>My Flashcard App</h1>
         </header>
-        <Card cardInfo={cardInfo} index={index}/>
-      <div>
+        <div className= "Cardinfo">
+        <Card  cardInfo={cardInfo} index={index}/>
+        </div>
+      <div className="QuestionButton">
       <button onClick={PreviousQuestionHandler}>Previous Question</button> <button onClick={nextQuestionHandler}>Next Question</button><br/> 
       </div>
       <div>
-            <div>
+            <div className="QA">
                 <label>Question:</label>
                 <input htmlFor="Question" id="Question" type="text" onChange={e => setQuestion(e.target.value)}/><br/>
                 <label>Answer:</label>
                 <input htmlFor="Answer" id="Answer" type="text" onChange={e => setAnswer(e.target.value)}/>
-            </div>  
-            <button onClick={addCard}>Add flashcard</button><br/> 
+            </div>
+            <div className="AddDelete">
+            <button onClick={addCard}>Add flashcard</button><br/>
+            <button onClick={deleteCard}>Delete flashcard</button>
+            </div>
       </div>
-      <button onClick={deleteCard}>Delete flashcard</button><br/> 
-        
-    
-  
-      
     </div>
   );
 

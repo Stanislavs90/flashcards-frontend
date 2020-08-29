@@ -11,15 +11,48 @@
 }
 
 .layout-question{
-  text-align: justify;
+  text-align: center;
   display: center;
   grid-template-columns: 1fr ;
   grid-gap: 10px;
 }
 
 .layout-answer{
-  text-align: justify;
+  text-align: center;
   display: center;
   grid-template-columns: 1fr ;
   grid-gap: 10px;
+}
+
+.Cardinfo{
+  text-align: center;
+  display: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-right: 100px;
+  margin-left: 80px;
+  display: block;
+  min-height: 106px;
+  
+
+ 
+}
+
+.QuestionButton{
+  text-align: center;
+  display: center;
+}
+
+.QA{
+  text-align: center;
+  display: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 150px;
+  margin-left: 100px;
+}
+
+.AddDelete{
+  text-align: center;
+  display: center;
 }
