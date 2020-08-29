@@ -13,7 +13,6 @@ function Card(props){
                 <div key={card.id}>
                <h2>{card.question}</h2>
                <Answer card={card} />
-               {/* <h2>{card.answer}</h2> */}
                </div>
                : "" 
                

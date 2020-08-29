@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Card from './components/card'
-import Add from './components/add'
-import API from './api-service'
+
 
 
 function App() {
@@ -50,7 +49,24 @@ function App() {
   const PreviousQuestionHandler = () => setIndex(Number(index) - 1)
 
 
+  
 
+  let idInfo = cardInfo.map((card, index)=>{
+    return card.id;
+  })
+
+  let maxId = Math.max(...idInfo)
+  
+  const deleteCard = (cardInfo, index) => 
+  fetch(`http://localhost:8000/flashcards/${maxId}/`, {
+      method: 'DELETE',
+      headers:{
+        'Content-Type':'application/json'
+        
+      }
+    })
+    .then(resp => resp.json())
+    .catch(error => console.log(error))
 
 
   return (
@@ -71,7 +87,7 @@ function App() {
             </div>  
             <button onClick={addCard}>Add flashcard</button><br/> 
       </div>
-      
+      <button onClick={deleteCard}>Delete flashcard</button><br/> 
         
     
   
