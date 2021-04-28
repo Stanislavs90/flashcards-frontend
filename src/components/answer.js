@@ -8,7 +8,14 @@ function Answer(props){
     return (
         <div>
             <button onClick = {(display)=>setDisplay(true)}>Display Answer</button> 
-            {display ? props.card.answer : null}
+            {display ? 
+            
+            <div>
+            <br/>
+            {props.card.answer}
+            </div>
+            
+            : null}
         </div>
     )
 }

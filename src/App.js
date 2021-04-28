@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Card from './components/card'
-
-
+import Card from './components/card';
+import Header from './components/header';
+import QuestionButton from './components/questionButtons';
+import QAInput from './components/QAInput';
+import APIService from '../src/api-service';
+import AddDelete from './components/AddDelete';
 
 function App() {
 
@@ -15,40 +18,20 @@ function App() {
 
 
   useEffect(()=>{
-    fetch(`http://localhost:8000/flashcards/`, {
-      method: 'GET',
-      headers:{
-        'Content-Type':'application/json'
-        
-      }
-    })
-    .then(resp => resp.json())
-    .then(resp => setCardInfo(resp)) 
-    .catch(error => console.log(error))
+
+    APIService.getAll(setCardInfo)
   }, [index])
 
-  const addCard = () => 
-    fetch(`http://localhost:8000/flashcards/`, {
-        method: 'POST',
-        headers:{
-          'Content-Type':'application/json'
-          
-        }, 
-        body: JSON.stringify({ 
-          question: question, 
-          answer: answer })
-      })
-      .then(resp => resp.json())
-      .catch(error => console.log(error))
+  const addCard = () => {
+      APIService.updateCard(question, answer)
+    }
   
   const nextQuestionHandler = () => setIndex(Number(index) + 1)
   
-
   const PreviousQuestionHandler = () => setIndex(Number(index) - 1)
 
-
   
- // Map over API data coming
+ // map over API data coming in
   let idInfo = cardInfo.map((card, index)=>{
     return card.id;
   })
@@ -57,41 +40,20 @@ function App() {
   let maxId = Math.max(...idInfo)
   
   // delete last element added
-  const deleteCard = (cardInfo, index) => 
-  fetch(`http://localhost:8000/flashcards/${maxId}/`, {
-      method: 'DELETE',
-      headers:{
-        'Content-Type':'application/json'
-        
-      }
-    })
-    .then(resp => resp.json())
-    .catch(error => console.log(error))
+  const deleteCard = (cardInfo, index) => {
+    APIService.deleteCard(cardInfo, index, maxId)
+  }
 
 
   return (
     <div className="App">
-        <header className="App-header">
-            <h1>My Flashcard App</h1>
-        </header>
+        <Header/>
         <div className= "Cardinfo">
-        <Card  cardInfo={cardInfo} index={index}/>
+          <Card  cardInfo={cardInfo} index={index}/>
         </div>
-      <div className="QuestionButton">
-      <button onClick={PreviousQuestionHandler}>Previous Question</button> <button onClick={nextQuestionHandler}>Next Question</button><br/> 
-      </div>
-      <div>
-            <div className="QA">
-                <label>Question:</label>
-                <input htmlFor="Question" id="Question" type="text" onChange={e => setQuestion(e.target.value)}/><br/>
-                <label>Answer:</label>
-                <input htmlFor="Answer" id="Answer" type="text" onChange={e => setAnswer(e.target.value)}/>
-            </div>
-            <div className="AddDelete">
-            <button onClick={addCard}>Add flashcard</button><br/>
-            <button onClick={deleteCard}>Delete flashcard</button>
-            </div>
-      </div>
+            <QuestionButton  next={nextQuestionHandler} prev={PreviousQuestionHandler}/>
+            <QAInput setQuestion={setQuestion} setAnswer={setAnswer}/>
+            <AddDelete add={addCard}  delete={deleteCard}  />
     </div>
   );
 

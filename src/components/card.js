@@ -14,7 +14,7 @@ function Card(props){
                <h2>{card.question}</h2>
                <Answer card={card} />
                </div>
-               : '                 ' 
+               : '' 
                
               )
             })}
